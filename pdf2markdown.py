@@ -277,7 +277,7 @@ def api_picker():
 
         if env_api_key:
             picked_api["api_key"] = env_api_key
-            print(f"{picked_api_name}API key leaded from enviroment\n")
+            print(f"{picked_api_name}API key loaded from enviroment\n")
         else:
             user_input_api_key    = input(f"Please paste you {picked_api['name']} API key\nNOTE: If API key is wrong, the program is going to crash\n")
 
