@@ -210,7 +210,7 @@ def api_picker():
                 "gemini-2.5-flash-lite",
                 "gemini-3.1-pro-preview"
                 ],
-            "api_key" : "empty" # No payment has been set
+            "api_key" : "empty"
         }
 
     ]
