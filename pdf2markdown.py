@@ -156,6 +156,7 @@ def ocr_function(pdf, dpi, url, api_key, model):
         # Εδώ θα μπει η συνάρτηση save2md
         save2md(document = full_page_content, filename = pdf)
         print(". . . done\n")
+
     document.close()
 
 
