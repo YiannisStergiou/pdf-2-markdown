@@ -5,6 +5,7 @@ import base64
 from openai  import OpenAI
 from pathlib import Path
 from dotenv  import load_dotenv
+from art     import text2art
 
 #################################################
 #############  pdf2base64 function  #############
