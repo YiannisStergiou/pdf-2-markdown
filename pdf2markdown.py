@@ -337,29 +337,29 @@ if __name__ == "__main__":
             # We call the function that gives the API info
             picked_api = api_picker()
             
-            raw_user_input_dpi = input("Default DPI = 100\nYou can change this now\n")
+            raw_user_input_dpi = input("Default DPI = 100\nYou can change this now. Accepted range: 1 to 600.\n")
             
             # If User presses Enter, DPI resets to 100
             if (raw_user_input_dpi.strip() == ""):
                 user_input_dpi = 100
             else:
-                try:
+                user_error = True
+                while (user_error == True):
                     user_input_dpi = int(raw_user_input_dpi)
 
-                    # DPI must be between 1 to 500.
+                    # DPI must be between 1 to 600.
                     # If not DPI resets to 100
-                    if (user_input_dpi <= 0 or user_input_dpi > 500):
-                        print("ERROR: DPI was Wrong. Accepted range: 1 to 500.\nDPI resets to 100")
-                        user_input_dpi = 100
-                # If user input was wrong, like string or float, DPI resets to 100
-                except ValueError:
-                    print("ERROR: DPI Must Be Integer.\nDPI resets to 100")
-                    user_input_dpi = 100
+                    if (user_input_dpi >= 1 and user_input_dpi <= 600):
+                        user_error = False
+                    else:
+                        user_error = True
+                        raw_user_input_dpi = input("ERROR: DPI was Wrong. Accepted range: 1 to 600.\nTry Again\n")
 
             print("#" * 100 + "\n")
 
-            # In case User wants to Convert every PDF into Markdown in the folder
-            if (user_input == -1):
+            try:
+                # In case User wants to Convert every PDF into Markdown in the folder
+                if (user_input == -1):
     
                 for index, pdf in enumerate(pdf_files_list):
                     print(f"[ {index + 1} ] {pdf.name} is now converting using {picked_api["model"]} . . .")
