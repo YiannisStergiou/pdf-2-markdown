@@ -293,43 +293,45 @@ from art import text2art
 
 if __name__ == "__main__":
 
-    banner_block = text2art("PDF  2  MD ")
-    print(banner_block)
-    print("© 2026 Ioannis Stergiou | Licensed under MIT\n")
+    start_over_again = "Yes"
+    while (start_over_again == "Yes"):
+        banner_block = text2art("PDF  2  MD ")
+        print(banner_block)
+        print("© 2026 Ioannis Stergiou | Licensed under MIT\n")
 
-    # Scans for all pdf in the folder
-    pdf_files_list = list(Path(".").glob("*.pdf"))
+        # Scans for all pdf in the folder
+        pdf_files_list = list(Path(".").glob("*.pdf"))
 
-    # 
-    if not pdf_files_list:
-        print("ERROR: No PDFs in this folder")
-    else:
-        user_error = True
-        while user_error == True:
+        #
+        if not pdf_files_list:
+            print("ERROR: No PDFs in this folder")
+        else:
+            user_error = True
+            while user_error == True:
 
-            print("Available PDFs in this Folder:")
+                print("Available PDFs in this Folder:")
 
-            # Prints the name of every pdf in the current folder
-            for index, pdf in enumerate(pdf_files_list):
-                print(f"[ {index + 1} ] {pdf.name}")
+                # Prints the name of every pdf in the current folder
+                for index, pdf in enumerate(pdf_files_list):
+                    print(f"[ {index + 1} ] {pdf.name}")
 
-            # User input here
-            raw_user_input = input("\nPick a pdf to convert into Markdown.\n-1: Convert All\n 0: No Conversion\n")
+                # User input here
+                raw_user_input = input("\nPick a pdf to convert into Markdown.\n-1: Convert All\n 0: Exit\n")
 
-            # Check if User Intput for PDF pick was wrong
-            try:
-                user_input = int(raw_user_input)
+                # Check if User Intput for PDF pick was wrong
+                try:
+                    user_input = int(raw_user_input)
 
-                # If User sets an illigal value, user_input resets to 0
-                if (user_input < -1 or user_input > len(pdf_files_list)):
-                    print(f"\n*** ERROR: You have to pick between 1 and {len(pdf_files_list)}.\n{user_input} is wrong! ***\n")
+                    # If User sets an illigal value, user_input resets to 0
+                    if (user_input < -1 or user_input > len(pdf_files_list)):
+                        print(f"\n*** ERROR: You have to pick between 1 and {len(pdf_files_list)}.\n{user_input} is wrong! ***\n")
+                        user_error = True
+                    else:
+                        user_error = False
+                except ValueError:
+                    # If user_intput is not integer, user_input will set to 0, and the program will end
+                    print(f"\n*** ERROR: Bro said '{raw_user_input}' LOL\nTry again. ***\n")
                     user_error = True
-                else:
-                    user_error = False
-            except ValueError:
-                # If user_intput is not integer, user_input will set to 0, and the program will end
-                print(f"\n*** ERROR: Bro said '{raw_user_input}' LOL\nTry again. ***\n")
-                user_error = True
 
         if (user_input == 0):
             print("\nHave Fun")
