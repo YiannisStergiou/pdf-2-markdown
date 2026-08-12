@@ -373,15 +373,24 @@ if __name__ == "__main__":
                 
 
     
-            # In case User wants to Convers a specific PDF into Markdown in the folder
-            else:
-                print(f"[ {user_input} ] {pdf_files_list[user_input - 1].name} is now converting using {picked_api["model"]} . . .")
-                pdf2md(
-                    url     = picked_api["url"],
-                    api_key = picked_api["api_key"],
-                    model   = picked_api["model"],
-                    pdf     = pdf_files_list[user_input - 1],
-                    dpi     = user_input_dpi
-                )
+                # In case User wants to Convers a specific PDF into Markdown in the folder
+                else:
+                    print(f"[ {user_input} ] {pdf_files_list[user_input - 1].name} is now converting using {picked_api['model']} . . .\n")
+                    pdf2md(
+                        url     = picked_api["url"],
+                        api_key = picked_api["api_key"],
+                        model   = picked_api["model"],
+                        pdf     = pdf_files_list[user_input - 1],
+                        dpi     = user_input_dpi
+                    )
+            except Exception as e:
+                print("*** *** Fatal Error *** ***\nCheck the following parameters for errors:")
+                print(f"API Name    = {picked_api['name']}")
+                print(f"API URL     = {picked_api['url']}")
+                print(f"API Key     = {picked_api['api_key']}")
+                print(f"Model       = {picked_api['model']}")
+                print(f"DPI         = {user_input_dpi}")
+                print("\n")
 
-    input("\nPress 'ENTER' to end the task ...")
+
+        start_over_again = input("Type 'Yes' if you wish to use PDF-2-Markdown Again\nPress 'ENTER' to end the task ...\n")
