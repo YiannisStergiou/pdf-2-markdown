@@ -361,15 +361,15 @@ if __name__ == "__main__":
                 # In case User wants to Convert every PDF into Markdown in the folder
                 if (user_input == -1):
     
-                for index, pdf in enumerate(pdf_files_list):
-                    print(f"[ {index + 1} ] {pdf.name} is now converting using {picked_api["model"]} . . .")
-                    pdf2md(
-                        url     = picked_api["url"],
-                        api_key = picked_api["api_key"],
-                        model   = picked_api["model"],
-                        pdf     = pdf.name,
-                        dpi     = user_input_dpi
-                    )
+                    for index, pdf in enumerate(pdf_files_list):
+                        print(f"[ {index + 1} ] {pdf.name} is now converting using {picked_api['model']} . . .\n")
+                        pdf2md(
+                            url     = picked_api["url"],
+                            api_key = picked_api["api_key"],
+                            model   = picked_api["model"],
+                            pdf     = pdf.name,
+                            dpi     = user_input_dpi
+                        )
                 
 
     
