@@ -186,6 +186,9 @@ def pdf2md(pdf, dpi, url, api_key, model):
 
 def api_picker():
 
+    # This list contains the parameters for the Local Model as well as Google's APIs
+    # Kinda arbitrary. I plan to make it less hard coded in the future.
+    # You may add your favorite API here.
     api_list = [
         {
             "name"    : "Local",
