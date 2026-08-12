@@ -69,7 +69,7 @@ def ocr_function(pdf, dpi, url, api_key, model):
         pass
 
     # Prints the model that used for OCR on top of the Markdown
-    picked_model      = f"<!--  File:  {Path(pdf).stem}.md  -->\n<!--  Model:  {model}  -->\n<!--  DPI:  {dpi}  -->\n\n"
+    picked_model     = f"<!--  File:  {Path(pdf).stem}.md  -->\n<!--  Model:  {model}  -->\n<!--  DPI:  {dpi}  -->\n\n"
     save2md(document = picked_model, filename = pdf)
 
     for page in range(page_count):
