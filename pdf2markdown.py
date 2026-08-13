@@ -337,60 +337,58 @@ if __name__ == "__main__":
                 # We call the function that gives the API info
                 picked_api = api_picker()
             
-            raw_user_input_dpi = input("Default DPI = 100\nYou can change this now. Accepted range: 1 to 600.\n")
+                raw_user_input_dpi = input("Default DPI = 100\nYou can change this now. Accepted range: 1 to 600.\n")
             
-            # If User presses Enter, DPI resets to 100
-            if (raw_user_input_dpi.strip() == ""):
-                user_input_dpi = 100
-            else:
-                user_error = True
-                while (user_error == True):
-                    user_input_dpi = int(raw_user_input_dpi)
+                # If User presses Enter, DPI resets to 100
+                if (raw_user_input_dpi.strip() == ""):
+                    user_input_dpi = 100
+                else:
+                    user_error = True
+                    while (user_error == True):
+                        user_input_dpi = int(raw_user_input_dpi)
 
-                    # DPI must be between 1 to 600.
-                    # If not DPI resets to 100
-                    if (user_input_dpi >= 1 and user_input_dpi <= 600):
-                        user_error = False
-                    else:
-                        user_error = True
-                        raw_user_input_dpi = input("ERROR: DPI was Wrong. Accepted range: 1 to 600.\nTry Again\n")
+                        # DPI must be between 1 to 600.
+                        # If not DPI resets to 100
+                        if (user_input_dpi >= 1 and user_input_dpi <= 600):
+                            user_error = False
+                        else:
+                            user_error = True
+                            raw_user_input_dpi = input("ERROR: DPI was Wrong. Accepted range: 1 to 600.\nTry Again\n")
 
-            print("#" * 100 + "\n")
+                print("#" * 100 + "\n")
 
-            try:
-                # In case User wants to Convert every PDF into Markdown in the folder
-                if (user_input == -1):
+                try:
+                    # In case User wants to Convert every PDF into Markdown in the folder
+                    if (user_input == -1):
     
-                    for index, pdf in enumerate(pdf_files_list):
-                        print(f"[ {index + 1} ] {pdf.name} is now converting using {picked_api['model']} . . .\n")
+                        for index, pdf in enumerate(pdf_files_list):
+                            print(f"[ {index + 1} ] {pdf.name} is now converting using {picked_api['model']} . . .\n")
+                            pdf2md(
+                                url     = picked_api["url"],
+                                api_key = picked_api["api_key"],
+                                model   = picked_api["model"],
+                                pdf     = pdf.name,
+                                dpi     = user_input_dpi
+                            )
+    
+                    # In case User wants to Convers a specific PDF into Markdown in the folder
+                    else:
+                        print(f"[ {user_input} ] {pdf_files_list[user_input - 1].name} is now converting using {picked_api['model']} . . .\n")
                         pdf2md(
                             url     = picked_api["url"],
                             api_key = picked_api["api_key"],
                             model   = picked_api["model"],
-                            pdf     = pdf.name,
+                            pdf     = pdf_files_list[user_input - 1],
                             dpi     = user_input_dpi
                         )
-                
-
-    
-                # In case User wants to Convers a specific PDF into Markdown in the folder
-                else:
-                    print(f"[ {user_input} ] {pdf_files_list[user_input - 1].name} is now converting using {picked_api['model']} . . .\n")
-                    pdf2md(
-                        url     = picked_api["url"],
-                        api_key = picked_api["api_key"],
-                        model   = picked_api["model"],
-                        pdf     = pdf_files_list[user_input - 1],
-                        dpi     = user_input_dpi
-                    )
-            except Exception as e:
-                print("*** *** Fatal Error *** ***\nCheck the following parameters for errors:")
-                print(f"API Name    = {picked_api['name']}")
-                print(f"API URL     = {picked_api['url']}")
-                print(f"API Key     = {picked_api['api_key']}")
-                print(f"Model       = {picked_api['model']}")
-                print(f"DPI         = {user_input_dpi}")
-                print("\n")
+                except Exception as e:
+                    print("*** *** Fatal Error *** ***\nCheck the following parameters for errors:")
+                    print(f"API Name    = {picked_api['name']}")
+                    print(f"API URL     = {picked_api['url']}")
+                    print(f"API Key     = {picked_api['api_key']}")
+                    print(f"Model       = {picked_api['model']}")
+                    print(f"DPI         = {user_input_dpi}")
+                    print("\n")
 
 
-        start_over_again = input("Type 'Yes' if you wish to use PDF-2-Markdown Again\nPress 'ENTER' to end the task ...\n")
+        start_over_again = input("\nType 'Yes' if you wish to use PDF-2-Markdown Again\nPress 'ENTER' to end the task ...\n")
