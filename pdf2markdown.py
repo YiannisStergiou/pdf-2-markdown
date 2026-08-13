@@ -355,13 +355,17 @@ if __name__ == "__main__":
                     while (user_error == True):
                         user_input_dpi = int(raw_user_input_dpi)
 
-                        # DPI must be between 100 to 1000.
-                        if (user_input_dpi >= 100 and user_input_dpi <= 1000):
-                            user_error = False
-                        # If user input for DPI is illigal, the loop will continue, providing user a new messege, asking to try again.
-                        else:
+                            # DPI must be between 100 to 1000.
+                            if (user_input_dpi >= 100 and user_input_dpi <= 1000):
+                                user_error = False
+                            # If user input for DPI is illigal, the loop will continue, providing user a new messege, asking to try again.
+                            else:
+                                user_error = True
+                                raw_user_input_dpi = input("ERROR: DPI was Wrong. Accepted range: 100 to 1000.\nTry Again\n")
+                        except ValueError:
                             user_error = True
-                            raw_user_input_dpi = input("ERROR: DPI was Wrong. Accepted range: 100 to 1000.\nTry Again\n")
+                            raw_user_input_dpi = input(f"'{raw_user_input_dpi}' is illigal. Accepted range: 100 to 1000\nTry Again.")
+
 
                 print("#" * 100 + "\n")
 
