@@ -333,8 +333,7 @@ if __name__ == "__main__":
                         user_error = False
                 # If user input is a string, this Error messege will appear, and the loop will continue.
                 except ValueError:
-                    # If user_intput is not integer, user_input will set to 0, and the program will end
-                    print(f"\n*** ERROR: Bro said '{raw_user_input}' LOL\nTry again. ***\n")
+                    print(f"\n*** ERROR ***\nIlligan Input: '{raw_user_input}'\nTry again.\n")
                     user_error = True
 
             if (user_input == 0):
