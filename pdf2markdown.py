@@ -331,11 +331,11 @@ if __name__ == "__main__":
                     print(f"\n*** ERROR: Bro said '{raw_user_input}' LOL\nTry again. ***\n")
                     user_error = True
 
-        if (user_input == 0):
-            print("\nHave Fun")
-        else:
-            # We call the function that gives the API info
-            picked_api = api_picker()
+            if (user_input == 0):
+                print("\nExiting")
+            else:
+                # We call the function that gives the API info
+                picked_api = api_picker()
             
             raw_user_input_dpi = input("Default DPI = 100\nYou can change this now. Accepted range: 1 to 600.\n")
             
