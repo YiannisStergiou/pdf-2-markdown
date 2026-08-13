@@ -323,7 +323,8 @@ if __name__ == "__main__":
                 try:
                     user_input = int(raw_user_input)
 
-                    # If User sets an illigal value, user_input resets to 0
+                    # User input must be between -1 and the number of total PDFs in the folder.
+                    # If not, the loop will continue.
                     if (user_input < -1 or user_input > len(pdf_files_list)):
                         print(f"\n*** ERROR: You have to pick between 1 and {len(pdf_files_list)}.\n{user_input} is wrong! ***\n")
                         user_error = True
