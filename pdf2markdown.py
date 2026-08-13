@@ -324,8 +324,10 @@ if __name__ == "__main__":
                     if (user_input < -1 or user_input > len(pdf_files_list)):
                         print(f"\n*** ERROR: You have to pick between 1 and {len(pdf_files_list)}.\n{user_input} is wrong! ***\n")
                         user_error = True
+                    # If user input is valid, the loop will stop, and 'user_input' will used in the next check sequence.
                     else:
                         user_error = False
+                # If user input is a string, this Error messege will appear, and the loop will continue.
                 except ValueError:
                     # If user_intput is not integer, user_input will set to 0, and the program will end
                     print(f"\n*** ERROR: Bro said '{raw_user_input}' LOL\nTry again. ***\n")
@@ -334,7 +336,8 @@ if __name__ == "__main__":
             if (user_input == 0):
                 print("\nExiting")
             else:
-                # We call the function that gives the API info
+                # We call the 'picked_api' function in witch user picks an API.
+                # 'picked_api' contains information of the picked API, like 'url', 'api_key' and 'model'
                 picked_api = api_picker()
             
                 raw_user_input_dpi = input("Default DPI = 100\nYou can change this now. Accepted range: 1 to 600.\n")
@@ -343,6 +346,7 @@ if __name__ == "__main__":
                 if (raw_user_input_dpi.strip() == ""):
                     user_input_dpi = 100
                 else:
+                    # Checking for Errors in 'user_input_dpi'
                     user_error = True
                     while (user_error == True):
                         user_input_dpi = int(raw_user_input_dpi)
@@ -351,6 +355,7 @@ if __name__ == "__main__":
                         # If not DPI resets to 100
                         if (user_input_dpi >= 1 and user_input_dpi <= 600):
                             user_error = False
+                        # If user input for DPI is illigal, the loop will continue, providing user a new messege, asking to try again.
                         else:
                             user_error = True
                             raw_user_input_dpi = input("ERROR: DPI was Wrong. Accepted range: 1 to 600.\nTry Again\n")
@@ -381,6 +386,9 @@ if __name__ == "__main__":
                             pdf     = pdf_files_list[user_input - 1],
                             dpi     = user_input_dpi
                         )
+
+                # If the Conversion unexpectedly stops, or any error occurred, the following information will be displayed.
+                # Usually, the errors occurring during API calls.
                 except Exception as e:
                     print("*** *** Fatal Error *** ***\nCheck the following parameters for errors:")
                     print(f"API Name    = {picked_api['name']}")
