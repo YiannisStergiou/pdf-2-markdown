@@ -404,6 +404,6 @@ if __name__ == "__main__":
                     print(f"API Key     = {picked_api['api_key']}")
                     print(f"Model       = {picked_api['model']}")
                     print(f"DPI         = {user_input_dpi}")
-                    print("\nAPI call limit reached, or the Local Server is configured incorrectly.\n")
+                    print(f"\nAPI call limit reached, or the Local Server is configured incorrectly.\n{e}")
 
         start_over_again = input("\nType 'Yes' if you wish to use PDF-2-Markdown Again\nPress 'ENTER' to end the task ...\n")
