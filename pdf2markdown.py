@@ -353,7 +353,8 @@ if __name__ == "__main__":
                     # Checking for Errors in 'user_input_dpi'
                     user_error = True
                     while (user_error == True):
-                        user_input_dpi = int(raw_user_input_dpi)
+                        try:
+                            user_input_dpi = int(raw_user_input_dpi)
 
                             # DPI must be between 100 to 1000.
                             if (user_input_dpi >= 100 and user_input_dpi <= 1000):
