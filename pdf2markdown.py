@@ -313,7 +313,10 @@ if __name__ == "__main__":
                 for index, pdf in enumerate(pdf_files_list):
                     print(f"[ {index + 1} ] {pdf.name}")
 
-                # User input here
+                # User can choose whitch PDF wants to Convert.
+                # 'n'  : For a specific PDF
+                # '-1' : To convert every PDF in the folder
+                # '0'  : To Exit the Program
                 raw_user_input = input("\nPick a pdf to convert into Markdown.\n-1: Convert All\n 0: Exit\n")
 
                 # Check if User Intput for PDF pick was wrong
