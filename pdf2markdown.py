@@ -342,10 +342,11 @@ if __name__ == "__main__":
                 # We call the 'picked_api' function in witch user picks an API.
                 # 'picked_api' contains information of the picked API, like 'url', 'api_key' and 'model'
                 picked_api = api_picker()
+
+                # Raw user input for DPI
+                raw_user_input_dpi = input("Default DPI = 100\nYou can change this now. Accepted range: 100 to 1000.\n")
             
-                raw_user_input_dpi = input("Default DPI = 100\nYou can change this now. Accepted range: 1 to 600.\n")
-            
-                # If User presses Enter, DPI resets to 100
+                # If user press Enter, DPI sets to 100
                 if (raw_user_input_dpi.strip() == ""):
                     user_input_dpi = 100
                 else:
@@ -354,14 +355,13 @@ if __name__ == "__main__":
                     while (user_error == True):
                         user_input_dpi = int(raw_user_input_dpi)
 
-                        # DPI must be between 1 to 600.
-                        # If not DPI resets to 100
-                        if (user_input_dpi >= 1 and user_input_dpi <= 600):
+                        # DPI must be between 100 to 1000.
+                        if (user_input_dpi >= 100 and user_input_dpi <= 1000):
                             user_error = False
                         # If user input for DPI is illigal, the loop will continue, providing user a new messege, asking to try again.
                         else:
                             user_error = True
-                            raw_user_input_dpi = input("ERROR: DPI was Wrong. Accepted range: 1 to 600.\nTry Again\n")
+                            raw_user_input_dpi = input("ERROR: DPI was Wrong. Accepted range: 100 to 1000.\nTry Again\n")
 
                 print("#" * 100 + "\n")
 
@@ -393,13 +393,12 @@ if __name__ == "__main__":
                 # If the Conversion unexpectedly stops, or any error occurred, the following information will be displayed.
                 # Usually, the errors occurring during API calls.
                 except Exception as e:
-                    print("*** *** Fatal Error *** ***\nCheck the following parameters for errors:")
+                    print("\n*** *** Fatal Error *** ***\nCheck the following parameters for errors:")
                     print(f"API Name    = {picked_api['name']}")
                     print(f"API URL     = {picked_api['url']}")
                     print(f"API Key     = {picked_api['api_key']}")
                     print(f"Model       = {picked_api['model']}")
                     print(f"DPI         = {user_input_dpi}")
-                    print("\n")
-
+                    print("\nAPI call limit reached, or the Local Server is configured incorrectly.\n")
 
         start_over_again = input("\nType 'Yes' if you wish to use PDF-2-Markdown Again\nPress 'ENTER' to end the task ...\n")
