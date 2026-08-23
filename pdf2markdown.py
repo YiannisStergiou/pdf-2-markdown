@@ -399,11 +399,11 @@ if __name__ == "__main__":
                 # Usually, the errors occurring during API calls.
                 except Exception as e:
                     print("\n*** *** Fatal Error *** ***\nCheck the following parameters for errors:")
-                    print(f"API Name    = {picked_api['name']}")
-                    print(f"API URL     = {picked_api['url']}")
-                    print(f"API Key     = {picked_api['api_key']}")
-                    print(f"Model       = {picked_api['model']}")
-                    print(f"DPI         = {user_input_dpi}")
+                    print(f"API Provider = {picked_api['provider']}")
+                    print(f"API URL      = {picked_api['url']}")
+                    print(f"API Key      = {picked_api['api_key']}")
+                    print(f"Model        = {picked_api['model']}")
+                    print(f"DPI          = {user_input_dpi}")
                     print(f"\nAPI call limit reached, or the Local Server is configured incorrectly.\n{e}")
 
         start_over_again = input("\nType 'Yes' if you wish to use PDF-2-Markdown Again\nPress 'ENTER' to end the task ...\n")
