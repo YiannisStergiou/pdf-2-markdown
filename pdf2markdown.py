@@ -93,7 +93,7 @@ def ocr_function(pdf, dpi, url, api_key, model):
                         "from the provided images with 100% accuracy, faithfully preserving its original structure, "
                         "paragraphs, and formatting.\n\n"
                         "**CRITICAL RULES:**\n"
-                        "1. DO NOT translate the text. Extract it exactly in its ORIGINAL language (e.g., Greek).\n"
+                        "1. DO NOT translate the text. Extract it exactly in its ORIGINAL language.\n"
                         "2. Do not add your own comments, introductions, or explanations. Output ONLY the extracted text.\n"
                         "3. Do not enclose the output in Markdown code blocks (```). Return pure, raw Markdown text.\n"
                         "4. If the image is completely empty or contains no text, output ONLY this exact string: <!-- Page Empty -->\n\n"
