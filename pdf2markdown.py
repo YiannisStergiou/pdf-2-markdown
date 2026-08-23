@@ -363,7 +363,6 @@ if __name__ == "__main__":
                                 user_error = False
                             # If user input for DPI is illigal, the loop will continue, providing user a new messege, asking to try again.
                             else:
-                                user_error = True
                                 raw_user_input_dpi = input("ERROR: DPI was Wrong. Accepted range: 100 to 1000.\nTry Again\n")
                         except ValueError:
                             user_error = True
