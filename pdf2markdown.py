@@ -193,15 +193,15 @@ def api_picker():
     # You may add your favorite API here.
     api_list = [
         {
-            "name"    : "Local",
-            "url"     : "http://127.0.0.1:1234/v1",
-            "model"   : "local-model",
-            "api_key" : "lm-studio"
+            "provider" : "Local",
+            "url"      : "http://127.0.0.1:1234/v1",
+            "model"    : "local-model",
+            "api_key"  : "lm-studio"
         },
         {
-            "name"    : "Google",
-            "url"     : "https://generativelanguage.googleapis.com/v1beta/openai/",
-            "model"   : [
+            "provider" : "Google",
+            "url"      : "https://generativelanguage.googleapis.com/v1beta/openai/",
+            "model"    : [
                 "gemini-3.5-flash-lite",
                 "gemini-3.1-flash-lite",
                 "gemma-4-31b-it",
@@ -212,7 +212,7 @@ def api_picker():
                 "gemini-2.5-flash-lite",
                 "gemini-3.1-pro-preview"
                 ],
-            "api_key" : "empty"
+            "api_key"  : "empty"
         }
 
     ]
@@ -220,10 +220,10 @@ def api_picker():
     while (user_error == True):
 
         ###  Available APIs in this session ###
-        print("Available APIs")
+        print("Available API providers")
 
-        for index, api_name in enumerate(api_list):
-            print(f"[ {index + 1} ] {api_name['name']}")
+        for index, selected_api in enumerate(api_list):
+            print(f"[ {index + 1} ] {selected_api['provider']}")
 
         # User Input for API picking
         user_input_for_api = input("\nPick a number to choose your API\n")
@@ -249,7 +249,7 @@ def api_picker():
         user_error = True
         while (user_error == True):
 
-            print(f"Available Models for {picked_api['name']} API\n")
+            print(f"Available Models for {picked_api['provider']} API\n")
             models_to_pick = picked_api["model"]
 
             for index, model_name in enumerate(models_to_pick):
@@ -274,14 +274,14 @@ def api_picker():
     ###  API Key Set  ###
     if picked_api["api_key"] == "empty":
         load_dotenv()
-        picked_api_name = picked_api["name"]
-        env_api_key     = os.getenv(f"{picked_api_name}_API_KEY")
+        picked_api_provider = picked_api["provider"]
+        env_api_key         = os.getenv(f"{picked_api_provider}_API_KEY")
 
         if env_api_key:
             picked_api["api_key"] = env_api_key
-            print(f"{picked_api_name}API key loaded from enviroment\n")
+            print(f"{picked_api_provider}API key loaded from enviroment\n")
         else:
-            user_input_api_key    = input(f"Please paste you {picked_api['name']} API key\n")
+            user_input_api_key    = input(f"Please paste you {picked_api['provider']} API key\n")
 
             user_input_api_key    = str(user_input_api_key)
             picked_api["api_key"] = user_input_api_key
