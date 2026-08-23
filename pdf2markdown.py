@@ -365,8 +365,7 @@ if __name__ == "__main__":
                             else:
                                 raw_user_input_dpi = input("ERROR: DPI was Wrong. Accepted range: 100 to 1000.\nTry Again\n")
                         except ValueError:
-                            user_error = True
-                            raw_user_input_dpi = input(f"'{raw_user_input_dpi}' is illigal. Accepted range: 100 to 1000\nTry Again.")
+                            raw_user_input_dpi = input(f"'{raw_user_input_dpi}' is illigal. Accepted range: 100 to 1000\nTry Again.\n")
 
 
                 print("#" * 100 + "\n")
