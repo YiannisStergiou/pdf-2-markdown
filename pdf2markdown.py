@@ -85,7 +85,6 @@ def ocr_function(pdf, dpi, url, api_key, model):
         response_OCR = client.chat.completions.create(
             model       = model,
             messages    = [
-                # System Promt
                 {
                     "role": "system",
                     "content": (
@@ -104,11 +103,9 @@ def ocr_function(pdf, dpi, url, api_key, model):
                         "to visually and structurally replicate the original document as closely as possible."
                     )
                 },
-                # User Input
                 {
                     "role": "user",
                     "content": [
-                        # User Prompt
                         {
                             "type": "text",
                             "text": "Extract the text from this document image following the system rules."
