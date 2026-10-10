@@ -92,12 +92,14 @@ def ocr_function(pdf, dpi, url, api_key, model):
                         "from the provided images with 100% accuracy, faithfully preserving its original structure, "
                         "paragraphs, and formatting.\n\n"
                         "**CRITICAL RULES:**\n"
-                        "1. DO NOT translate the text. Extract it exactly in its ORIGINAL language (e.g., Greek).\n"
+                        "1. DO NOT translate the text. Extract it exactly in its ORIGINAL language.\n"
                         "2. Do not add your own comments, introductions, or explanations. Output ONLY the extracted text.\n"
                         "3. Do not enclose the output in Markdown code blocks (```). Return pure, raw Markdown text.\n"
-                        "4. If the image is completely empty or contains no text, output ONLY this exact string: <!-- Page Empty -->\n\n"
-                        "5. When encountering mathematical equations, formulas, or symbols, you MUST format them strictly using LaTeX. Use `$` for inline math and `$$` for display/block equations.\n"
-                        "6. When encountering URLs or web links, you MUST format them as clickable HTML tags (e.g., `<a href=\"URL\">URL</a>`).\n\n"
+                        "4. If the image is completely empty or contains no text, output ONLY this exact string: <!-- Page Empty -->\n"
+                        "5. When encountering mathematical equations, formulas, or symbols, you MUST format them strictly using LaTeX. Use `$` or '$$' appropriately where needed.\n"
+                        "6. When encountering URLs or web links, you MUST format them as clickable HTML tags (e.g., `<a href=\"URL\">URL</a>`).\n"
+                        "7. When encountering Images, Graphics, Signatures, Stamps, Graphs and anything that is not necessarily charachers, "
+                        "try to describe it. If you can not describe it, ignore it.\n\n"
                         "**MARKDOWN FORMATTING:**\n"
                         "Use standard Markdown tools (bold, italics, tables, lists, `#` headers) exclusively "
                         "to visually and structurally replicate the original document as closely as possible."
@@ -185,15 +187,15 @@ def api_picker():
     # You may add your favorite API here.
     api_list = [
         {
-            "name"    : "Local",
-            "url"     : "http://127.0.0.1:1234/v1",
-            "model"   : "local-model",
-            "api_key" : "lm-studio"
+            "provider" : "Local",
+            "url"      : "http://127.0.0.1:1234/v1",
+            "model"    : "local-model",
+            "api_key"  : "lm-studio"
         },
         {
-            "name"    : "Google",
-            "url"     : "https://generativelanguage.googleapis.com/v1beta/openai/",
-            "model"   : [
+            "provider" : "Google",
+            "url"      : "https://generativelanguage.googleapis.com/v1beta/openai/",
+            "model"    : [
                 "gemini-3.5-flash-lite",
                 "gemini-3.1-flash-lite",
                 "gemma-4-31b-it",
@@ -204,7 +206,7 @@ def api_picker():
                 "gemini-2.5-flash-lite",
                 "gemini-3.1-pro-preview"
                 ],
-            "api_key" : "empty"
+            "api_key"  : "empty"
         }
 
     ]
@@ -212,10 +214,10 @@ def api_picker():
     while (user_error == True):
 
         ###  Available APIs in this session ###
-        print("Available APIs")
+        print("Available API providers")
 
-        for index, api_name in enumerate(api_list):
-            print(f"[ {index + 1} ] {api_name['name']}")
+        for index, selected_api in enumerate(api_list):
+            print(f"[ {index + 1} ] {selected_api['provider']}")
 
         # User Input for API picking
         user_input_for_api = input("\nPick a number to choose your API\n")
@@ -241,7 +243,7 @@ def api_picker():
         user_error = True
         while (user_error == True):
 
-            print(f"Available Models for {picked_api['name']} API\n")
+            print(f"Available Models for {picked_api['provider']} API\n")
             models_to_pick = picked_api["model"]
 
             for index, model_name in enumerate(models_to_pick):
@@ -266,14 +268,14 @@ def api_picker():
     ###  API Key Set  ###
     if picked_api["api_key"] == "empty":
         load_dotenv()
-        picked_api_name = picked_api["name"]
-        env_api_key     = os.getenv(f"{picked_api_name}_API_KEY")
+        picked_api_provider = picked_api["provider"]
+        env_api_key         = os.getenv(f"{picked_api_provider}_API_KEY")
 
         if env_api_key:
             picked_api["api_key"] = env_api_key
-            print(f"{picked_api_name}API key loaded from enviroment\n")
+            print(f"{picked_api_provider}API key loaded from enviroment\n")
         else:
-            user_input_api_key    = input(f"Please paste you {picked_api['name']} API key\n")
+            user_input_api_key    = input(f"Please paste you {picked_api['provider']} API key\n")
 
             user_input_api_key    = str(user_input_api_key)
             picked_api["api_key"] = user_input_api_key
@@ -355,11 +357,9 @@ if __name__ == "__main__":
                                 user_error = False
                             # If user input for DPI is illigal, the loop will continue, providing user a new messege, asking to try again.
                             else:
-                                user_error = True
                                 raw_user_input_dpi = input("ERROR: DPI was Wrong. Accepted range: 100 to 1000.\nTry Again\n")
                         except ValueError:
-                            user_error = True
-                            raw_user_input_dpi = input(f"'{raw_user_input_dpi}' is illigal. Accepted range: 100 to 1000\nTry Again.")
+                            raw_user_input_dpi = input(f"'{raw_user_input_dpi}' is illigal. Accepted range: 100 to 1000\nTry Again.\n")
 
 
                 print("#" * 100 + "\n")
@@ -393,11 +393,11 @@ if __name__ == "__main__":
                 # Usually, the errors occurring during API calls.
                 except Exception as e:
                     print("\n*** *** Fatal Error *** ***\nCheck the following parameters for errors:")
-                    print(f"API Name    = {picked_api['name']}")
-                    print(f"API URL     = {picked_api['url']}")
-                    print(f"API Key     = {picked_api['api_key']}")
-                    print(f"Model       = {picked_api['model']}")
-                    print(f"DPI         = {user_input_dpi}")
+                    print(f"API Provider = {picked_api['provider']}")
+                    print(f"API URL      = {picked_api['url']}")
+                    print(f"API Key      = {picked_api['api_key']}")
+                    print(f"Model        = {picked_api['model']}")
+                    print(f"DPI          = {user_input_dpi}")
                     print(f"\nAPI call limit reached, or the Local Server is configured incorrectly.\n{e}")
 
         start_over_again = input("\nType 'Yes' if you wish to use PDF-2-Markdown Again\nPress 'ENTER' to end the task ...\n")
