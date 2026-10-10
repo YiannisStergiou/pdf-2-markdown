@@ -109,9 +109,7 @@ def ocr_function(pdf, dpi, url, api_key, model):
                         {
                             "type": "text",
                             "text": "Extract the text from this document image following the system rules."
-
                         },
-                        # User Attached Files
                         {
                             "type": "image_url",
                             "image_url": {"url": f"data:image/png;base64,{string}"}
