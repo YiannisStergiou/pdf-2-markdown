@@ -117,8 +117,7 @@ def ocr_function(pdf, dpi, url, api_key, model):
                     ]
                 }
             ],
-            # Temperature set to 0.0 for less hallucination
-            temperature = 0.0
+            temperature       = 0.2
         )
         # Time
         end_time  = time.time()
