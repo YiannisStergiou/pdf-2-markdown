@@ -94,7 +94,7 @@ def ocr_function(pdf, dpi, url, api_key, model):
                         "4. If the image is completely empty or contains no text, output ONLY this exact string: <!-- Page Empty -->\n"
                         "5. When encountering mathematical equations, formulas, or symbols, you MUST format them strictly using LaTeX. Use `$` or '$$' appropriately where needed.\n"
                         "6. When encountering URLs or web links, you MUST format them as clickable HTML tags (e.g., `<a href=\"URL\">URL</a>`).\n"
-                        "7. When encountering Images, Graphics, Signatures, Stamps, Graphs and anything that is not necessarily charachers, "
+                        "7. When encountering Images, Graphics, Signatures, Stamps, Graphs and anything that is not necessarily text or characters, "
                         "try to describe it. If you can not describe it, ignore it.\n\n"
                         "**MARKDOWN FORMATTING:**\n"
                         "Use standard Markdown tools (bold, italics, tables, lists, `#` headers) exclusively "
