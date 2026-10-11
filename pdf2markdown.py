@@ -43,7 +43,6 @@ def doc2base64(document, DPI):
 
 def save2md(document, filename):
 
-    # Ανοίγουμε το αρχείο και το γράφουμε σε Markdown
     with open(f"{Path(filename).stem}.md", "a", encoding = "utf-8") as final_markdown:
         final_markdown.write(document)
 
