@@ -11,9 +11,6 @@ from art     import text2art
 #############  pdf2base64 function  #############
 #################################################
 
-# converts each page of the pdf into base64 string, using utf-8 formating
-# Output: base64 string & total pdf pages
-
 def pdf2doc(PDF):
     # Document Mapping
     document        = fitz.open(PDF)
