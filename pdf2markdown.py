@@ -41,10 +41,10 @@ def doc2base64(document, DPI):
 ###############  save2md function  ###############
 ##################################################
 
-def save2md(document, filename):
+def save2md(text, filename):
 
     with open(f"{Path(filename).stem}.md", "a", encoding = "utf-8") as final_markdown:
-        final_markdown.write(document)
+        final_markdown.write(text)
 
 ###################################################
 #############  ocr_function function  #############
@@ -146,7 +146,7 @@ def ocr_function(pdf, dpi, url, api_key, model):
         full_page_content = f"{header}\n\n{markdown_text}\n\n{footer}\n\n"
 
         # Εδώ θα μπει η συνάρτηση save2md
-        save2md(document = full_page_content, filename = pdf)
+        save2md(text = full_page_content, filename = pdf)
         print(". . . done\n")
 
     document.close()
