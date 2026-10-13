@@ -291,6 +291,11 @@ if __name__ == "__main__":
 
         # Scans for all pdf in the folder
         pdf_files_list = list(Path(".").glob("*.pdf"))
+        md_files_list  = list(Path(".").glob("*.md"))
+
+        md_files_stem  = [ ]
+        for markdown in md_files_list:
+            md_files_stem.append(markdown.stem)
 
         #
         if not pdf_files_list:
@@ -303,7 +308,10 @@ if __name__ == "__main__":
 
                 # Prints the name of every pdf in the current folder
                 for index, pdf in enumerate(pdf_files_list):
-                    print(f"[ {index + 1} ] {pdf.name}")
+                    if pdf.stem in md_files_stem:
+                        print(f"[ {index + 1} ]* {pdf.name}")
+                    else:
+                        print(f"[ {index + 1} ] {pdf.name}")
 
                 # User can choose whitch PDF wants to Convert.
                 # 'n'  : For a specific PDF
