@@ -1,4 +1,4 @@
-import fitz
+import pymupdf
 import os
 import time
 import base64
@@ -13,7 +13,7 @@ from art     import text2art
 
 def pdf2doc(PDF):
     # Document Mapping
-    document        = fitz.open(PDF)
+    document        = pymupdf.open(PDF)
     total_doc_pages = len(document)
     
     return document, total_doc_pages
@@ -24,7 +24,7 @@ def pdf2doc(PDF):
 
 def doc2base64(document, DPI):
     # PDF page converts to PNG
-    pic = document.get_pixmap(dpi = DPI, colorspace = fitz.csGRAY)
+    pic = document.get_pixmap(dpi = DPI, colorspace = pymupdf.csGRAY)
 
     # Raw pixels to PNG format
     pic_bytes = pic.tobytes("png")
