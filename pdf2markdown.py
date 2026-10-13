@@ -316,8 +316,9 @@ if __name__ == "__main__":
                 # User can choose whitch PDF wants to Convert.
                 # 'n'  : For a specific PDF
                 # '-1' : To convert every PDF in the folder
+                # '-2' : To convert every PDF skipping every already converted PDF
                 # '0'  : To Exit the Program
-                raw_user_input = input("\nPick a pdf to convert into Markdown.\n-1: Convert All\n 0: Exit\n")
+                raw_user_input = input("\nPick a pdf to convert into Markdown.\n-1: Convert All\n-2: Convert All (Skip already converted)\n0: Exit\n")
 
                 # Check if User Intput for PDF pick was wrong
                 try:
@@ -325,7 +326,7 @@ if __name__ == "__main__":
 
                     # User input must be between -1 and the number of total PDFs in the folder.
                     # If not, the loop will continue.
-                    if (user_input < -1 or user_input > len(pdf_files_list)):
+                    if (user_input < -2 or user_input > len(pdf_files_list)):
                         print(f"\n*** ERROR: You have to pick between 1 and {len(pdf_files_list)}.\n{user_input} is wrong! ***\n")
                         user_error = True
                     # If user input is valid, the loop will stop, and 'user_input' will used in the next check sequence.
