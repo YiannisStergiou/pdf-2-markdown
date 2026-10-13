@@ -382,7 +382,21 @@ if __name__ == "__main__":
                                 pdf     = pdf.name,
                                 dpi     = user_input_dpi
                             )
-    
+
+                    elif (user_input == -2):
+                        for index, pdf in enumerate(pdf_files_list):
+                            if pdf.stem not in md_files_stem:
+                                print(f"[ {index + 1} ] {pdf.name} is now converting using {picked_api['model']} . . .\n")
+                                pdf2md(
+                                    url     = picked_api["url"],
+                                    api_key = picked_api["api_key"],
+                                    model   = picked_api["model"],
+                                    pdf     = pdf.name,
+                                    dpi     = user_input_dpi
+                                )
+                            else:
+                                print(f"{pdf.name} skipped")
+
                     # In case User wants to Convers a specific PDF into Markdown in the folder
                     else:
                         print(f"[ {user_input} ] {pdf_files_list[user_input - 1].name} is now converting using {picked_api['model']} . . .\n")
@@ -390,7 +404,7 @@ if __name__ == "__main__":
                             url     = picked_api["url"],
                             api_key = picked_api["api_key"],
                             model   = picked_api["model"],
-                            pdf     = pdf_files_list[user_input - 1],
+                            pdf     = pdf_files_list[user_input - 1].name,
                             dpi     = user_input_dpi
                         )
 
